@@ -2,8 +2,7 @@
   "name": "tentamen",
   "version": "0.0.0",
   "description": "JavaScript testing, but tiny",
-  "type": "module",
-  "exports": "./tentamen.js",
+  "main": "tentamen.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sporeball/tentamen/issues"
   },
-  "homepage": "https://github.com/sporeball/tentamen#readme"
+  "homepage": "https://github.com/sporeball/tentamen#readme",
+  "dependencies": {
+    "log-update": "^4.0.0"
+  }
 }
