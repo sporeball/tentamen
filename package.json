@@ -1,0 +1,20 @@
+{
+  "name": "tentamen",
+  "version": "0.0.0",
+  "description": "JavaScript testing, but tiny",
+  "type": "module",
+  "exports": "./tentamen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sporeball/tentamen.git"
+  },
+  "author": "sporeball",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sporeball/tentamen/issues"
+  },
+  "homepage": "https://github.com/sporeball/tentamen#readme"
+}
