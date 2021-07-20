@@ -11,6 +11,8 @@ const { main } = logUpdate;
 
 export default class Tentamen {
   constructor(obj) {
+    this.passing = 0;
+    this.failing = 0;
     this.fn = obj.fn;
     this.before = obj.before || function(input) {
       return input;
@@ -27,16 +29,23 @@ export default class Tentamen {
     let output = (this.fn)(input);
     output = (this.after)(output);
     if (output === expected) {
+      this.passing++;
       logUpdate(`  ${chalk.green('o')} ${title}`);
+      logUpdate.done();
     } else {
+      this.failing++;
       logUpdate(`  ${chalk.red('x')} ${title}`);
+      logUpdate.done();
+      console.log(`    expected ${expected}, got ${output}`);
     }
-
-    logUpdate.done();
   }
 
   suite(title, fn = this.fn) {
     this.fn = fn;
     console.log(title);
+  }
+
+  done() {
+    console.log(`\n${chalk.green(`${this.passing} passing,`)} ${chalk.red(`${this.failing} failing`)}`);
   }
 }
