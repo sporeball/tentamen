@@ -6,6 +6,7 @@
 */
 
 const logUpdate = require('log-update');
+const chalk = require('chalk');
 
 class Tentamen {
   constructor(obj) {
@@ -25,9 +26,9 @@ class Tentamen {
     let output = (this.fn)(input);
     output = (this.after)(output);
     if (output === expected) {
-      logUpdate(`  O ${title}`);
+      logUpdate(`  ${chalk.green('o')} ${title}`);
     } else {
-      logUpdate(`  X ${title}`);
+      logUpdate(`  ${chalk.red('x')} ${title}`);
     }
 
     logUpdate.done();
