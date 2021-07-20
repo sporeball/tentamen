@@ -2,7 +2,8 @@
   "name": "tentamen",
   "version": "0.0.0",
   "description": "JavaScript testing, but tiny",
-  "main": "tentamen.js",
+  "type": "module",
+  "exports": "./tentamen.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -5,10 +5,11 @@
   MIT license
 */
 
-const logUpdate = require('log-update');
-const chalk = require('chalk');
+import chalk from 'chalk';
+import logUpdate from 'log-update';
+const { main } = logUpdate;
 
-class Tentamen {
+export default class Tentamen {
   constructor(obj) {
     this.fn = obj.fn;
     this.before = obj.before || function(input) {
@@ -39,5 +40,3 @@ class Tentamen {
     console.log(title);
   }
 }
-
-module.exports = Tentamen;
