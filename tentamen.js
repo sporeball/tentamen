@@ -6,6 +6,7 @@
 
 import chalk from 'chalk';
 import logUpdate from 'log-update';
+import indentString from 'indent-string';
 
 export default class Tentamen {
   constructor (obj) {
@@ -18,17 +19,26 @@ export default class Tentamen {
   add (title, input, expected) {
     logUpdate(`    ${title}`);
     input = this.before(input);
-    const output = this.after(this.fn(input));
+    let output;
+
+    try {
+      output = this.after(this.fn(input));
+    } catch (e) {
+      this.failing++;
+      logUpdate(`  ${chalk.red('x')} ${title}`);
+      console.log(indentString(e.message, 4));
+      return;
+    }
+
     if (output === expected) {
       this.passing++;
       logUpdate(`  ${chalk.green('o')} ${title}`);
-      logUpdate.done();
     } else {
       this.failing++;
       logUpdate(`  ${chalk.red('x')} ${title}`);
-      logUpdate.done();
       console.log(`    expected ${expected}, got ${output}`);
     }
+    logUpdate.done();
   }
 
   suite (title, fn = this.fn) {

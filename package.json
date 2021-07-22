@@ -19,6 +19,7 @@
   "homepage": "https://github.com/sporeball/tentamen#readme",
   "dependencies": {
     "chalk": "^4.1.1",
+    "indent-string": "^5.0.0",
     "log-update": "^4.0.0"
   }
 }
