@@ -1,6 +1,6 @@
 {
   "name": "tentamen",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a tiny JavaScript testing framework",
   "type": "module",
   "exports": "./tentamen.js",
