@@ -44,7 +44,7 @@ export default class Tentamen {
 
   suite (title, fn = this.fn) {
     this.fn = fn;
-    console.log(title);
+    console.log(chalk.cyan(title));
   }
 
   done () {
