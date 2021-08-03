@@ -5,6 +5,7 @@
 */
 
 import chalk from 'chalk';
+import { dequal } from 'dequal/lite';
 import logUpdate from 'log-update';
 import indentString from 'indent-string';
 
@@ -30,7 +31,7 @@ export default class Tentamen {
       return;
     }
 
-    if (output === expected) {
+    if (dequal(output, expected)) {
       this.passing++;
       logUpdate(`  ${chalk.green('o')} ${title}`);
     } else {
