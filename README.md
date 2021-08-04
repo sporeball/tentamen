@@ -2,7 +2,8 @@
 
 <a href="https://www.npmjs.com/package/tentamen"><img src="https://img.shields.io/npm/v/tentamen" /></a>
 
-**tentamen** is a tiny (less than 50 source lines of code) JavaScript testing framework.
+**tentamen** is a tiny (less than 50 source lines of code) JavaScript testing framework.\
+it uses deep equality, so you can test against arrays and objects with ease.
 
 ### install
 ```
@@ -55,10 +56,40 @@ type: `function`
 
 a function to manipulate the input to each test before the test runs.
 
-##### after(input)
+##### after(output)
 type: `function`
 
 a function to manipulate the output of each test before tentamen verifies it.
+
+##### error(e)
+type: `function`
+
+if an error thrown during testing is not of the default `Error` type, this function will decide what is output below the name of the failing test:
+```js
+let tentamen = new Tentamen({
+  fn: () => { throw new Exception('something went wrong'); },
+  error: e => e.message
+});
+
+class Exception {
+  constructor (message) {
+    this.message = `error: ${message}\n  at line:column`
+  }
+}
+
+tentamen.suite('custom errors');
+tentamen.add('should do something');
+```
+```
+$ node test.js
+custom errors
+  x should do something
+    error: something went wrong
+      at line:column
+```
+
+the return value of this function must be of type `string`.\
+if an error *is* of type `Error`, `e.stack` will be output.
 
 ### tentamen.suite(title, fn?)
 start a new group of tests.
