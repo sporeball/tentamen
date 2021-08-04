@@ -15,6 +15,7 @@ export default class Tentamen {
     this.fn = obj.fn;
     this.before = obj.before || function (input) { return input; };
     this.after = obj.after || function (input) { return input; };
+    this.error = obj.error || function (e) { return e; };
   }
 
   add (title, input, expected) {
@@ -27,7 +28,11 @@ export default class Tentamen {
     } catch (e) {
       this.failing++;
       logUpdate(`  ${chalk.red('x')} ${title}`);
-      console.log(indentString(e.message, 4));
+      if (e instanceof Error) {
+        console.log(indentString(e.stack, 4));
+      } else {
+        console.log(indentString(this.error(e), 4));
+      }
       return;
     }
 
