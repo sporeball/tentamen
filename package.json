@@ -11,6 +11,17 @@
     "type": "git",
     "url": "git+https://github.com/sporeball/tentamen.git"
   },
+  "keywords": [
+    "test",
+    "testing",
+    "tdd",
+    "bdd",
+    "runner",
+    "ava",
+    "jasmine",
+    "jest",
+    "mocha"
+  ],
   "author": "sporeball",
   "license": "MIT",
   "bugs": {
