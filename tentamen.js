@@ -6,7 +6,6 @@
 
 import chalk from 'chalk';
 import { dequal } from 'dequal/lite';
-import logUpdate from 'log-update';
 import indentString from 'indent-string';
 
 export default class Tentamen {
@@ -16,35 +15,36 @@ export default class Tentamen {
     this.before = obj.before || function (input) { return input; };
     this.after = obj.after || function (input) { return input; };
     this.error = obj.error || function (e) { return e; };
+    this.afterError = obj.afterError || function (e) { return e; };
   }
 
   add (title, input, expected) {
-    logUpdate(`    ${title}`);
     input = this.before(input);
     let output;
 
     try {
       output = this.after(this.fn(input));
     } catch (e) {
-      this.failing++;
-      logUpdate(`  ${chalk.red('x')} ${title}`);
-      if (e instanceof Error) {
-        console.log(indentString(e.stack, 4));
+      output = this.error(e);
+      if (dequal(this.afterError(output), expected)) {
+        this.passing++;
+        console.log(`  ${chalk.green('o')} ${title}`);
       } else {
-        console.log(indentString(this.error(e), 4));
+        this.failing++;
+        console.log(`  ${chalk.red('x')} ${title}`);
+        console.log(indentString(output, 4));
       }
       return;
     }
 
     if (dequal(output, expected)) {
       this.passing++;
-      logUpdate(`  ${chalk.green('o')} ${title}`);
+      console.log(`  ${chalk.green('o')} ${title}`);
     } else {
       this.failing++;
-      logUpdate(`  ${chalk.red('x')} ${title}`);
+      console.log(`  ${chalk.red('x')} ${title}`);
       console.log(`    expected ${expected}, got ${output}`);
     }
-    logUpdate.done();
   }
 
   suite (title, fn = this.fn) {
