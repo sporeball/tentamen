@@ -4,7 +4,7 @@
   MIT license
 */
 
-import chalk from 'chalk';
+import colors from 'picocolors';
 import { dequal } from 'dequal/lite';
 import indentString from 'indent-string';
 
@@ -28,10 +28,10 @@ export default class Tentamen {
       output = this.error(e);
       if (dequal(this.afterError(output), expected)) {
         this.passing++;
-        console.log(`  ${chalk.green('o')} ${title}`);
+        console.log(`  ${colors.green('o')} ${title}`);
       } else {
         this.failing++;
-        console.log(`  ${chalk.red('x')} ${title}`);
+        console.log(`  ${colors.red('x')} ${title}`);
         console.log(indentString(output, 4));
       }
       return;
@@ -39,17 +39,17 @@ export default class Tentamen {
 
     if (dequal(output, expected)) {
       this.passing++;
-      console.log(`  ${chalk.green('o')} ${title}`);
+      console.log(`  ${colors.green('o')} ${title}`);
     } else {
       this.failing++;
-      console.log(`  ${chalk.red('x')} ${title}`);
+      console.log(`  ${colors.red('x')} ${title}`);
       console.log(`    expected ${expected}, got ${output}`);
     }
   }
 
   suite (title, fn = this.fn) {
     this.fn = fn;
-    console.log(chalk.cyan(title));
+    console.log(colors.cyan(title));
   }
 
   done () {
