@@ -6,7 +6,6 @@
 
 import colors from 'picocolors';
 import { dequal } from 'dequal/lite';
-import indentString from 'indent-string';
 
 export default class Tentamen {
   constructor (obj) {
@@ -14,37 +13,38 @@ export default class Tentamen {
     this.fn = obj.fn;
     this.before = obj.before || function (input) { return input; };
     this.after = obj.after || function (input) { return input; };
-    this.error = obj.error || function (e) { return e; };
-    this.afterError = obj.afterError || function (e) { return e; };
   }
 
   add (title, input, expected) {
-    input = this.before(input);
-    let output;
+    this.before();
+
+    let returned, errored;
 
     try {
-      output = this.after(this.fn(input));
+      returned = this.fn(input);
     } catch (e) {
-      output = this.error(e);
-      if (dequal(this.afterError(output), expected)) {
-        this.passing++;
-        console.log(`  ${colors.green('o')} ${title}`);
-      } else {
-        this.failing++;
-        console.log(`  ${colors.red('x')} ${title}`);
-        console.log(indentString(output, 4));
-      }
-      return;
+      returned = e;
+      errored = true;
     }
 
-    if (dequal(output, expected)) {
+    if (dequal(expected, returned)) {
       this.passing++;
       console.log(`  ${colors.green('o')} ${title}`);
+      if (errored) {
+        console.log(colors.gray(`    (${returned.name})`));
+      }
     } else {
       this.failing++;
       console.log(`  ${colors.red('x')} ${title}`);
-      console.log(`    expected ${expected}, got ${output}`);
+      if (errored) {
+        console.log(`    ${colors.red('(e)')}`);
+        console.log(returned);
+      } else {
+        console.log(colors.gray(`    (expected ${expected}, got ${returned})`));
+      }
     }
+
+    this.after();
   }
 
   suite (title, fn = this.fn) {
