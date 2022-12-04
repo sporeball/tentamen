@@ -29,18 +29,17 @@ export default class Tentamen {
 
     if (dequal(expected, returned)) {
       this.passing++;
-      console.log(`  ${colors.green('o')} ${title}`);
+      console.log(colors.green('  o  ') + title);
       if (errored) {
-        console.log(colors.gray(`    (${returned.name})`));
+        console.log(colors.gray(`     (${returned.name})`));
       }
     } else {
       this.failing++;
-      console.log(`  ${colors.red('x')} ${title}`);
+      console.log(colors.red(`  X  ${title}`));
       if (errored) {
-        console.log(`    ${colors.red('(e)')}`);
         console.log(returned);
       } else {
-        console.log(colors.gray(`    (expected ${expected}, got ${returned})`));
+        console.log(colors.yellow(`     (expected ${expected}, got ${returned})`));
       }
     }
 
