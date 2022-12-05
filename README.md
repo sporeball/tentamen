@@ -2,7 +2,7 @@
 
 <a href="https://www.npmjs.com/package/tentamen"><img src="https://img.shields.io/npm/v/tentamen" /></a>
 
-**tentamen** is a tiny (less than 50 source lines of code) JavaScript testing framework, just perfect for making sure that a function gives the right return values.
+**tentamen** is a tiny (less than 50 source lines of code) JavaScript testing framework, just perfect for making sure that a function gives the right return values.\
 it uses deep equality, so you can easily test against things like arrays, objects, [and even error instances.](#on-tests-and-errors)
 
 
@@ -105,7 +105,7 @@ in that case, you can add a test whose `expected` value is an error instance:
 ```js
 tentamen.suite('error');
 // arrays don't have a startsWith method!
-tentamen.add('should fail, [], new TypeError);
+tentamen.add('should fail', [], new TypeError);
 ```
 ```
 error
