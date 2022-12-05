@@ -11,8 +11,8 @@ export default class Tentamen {
   constructor (obj) {
     this.passing = this.failing = 0;
     this.fn = obj.fn;
-    this.before = obj.before || function (input) { return input; };
-    this.after = obj.after || function (input) { return input; };
+    this.before = obj.before || function () { };
+    this.after = obj.after || function () { };
   }
 
   add (title, input, expected) {
