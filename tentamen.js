@@ -10,7 +10,7 @@ import { dequal } from 'dequal/lite';
 export default class Tentamen {
   constructor (obj) {
     this.passing = this.failing = 0;
-    this.fn = obj.fn;
+    this.fn = obj.fn || function () { };
     this.before = obj.before || function () { };
     this.after = obj.after || function () { };
   }
@@ -18,10 +18,11 @@ export default class Tentamen {
   add (title, input, expected) {
     this.before();
 
+    this.input = input;
     let returned, errored;
 
     try {
-      returned = this.fn(input);
+      returned = this.fn();
     } catch (e) {
       returned = e;
       errored = true;
