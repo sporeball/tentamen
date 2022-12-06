@@ -52,12 +52,12 @@ type: `function`
 
 the function to run tests on.
 
-##### before(input)
+##### before
 type: `function`
 
 function to call before each test. good for pre-conditions.
 
-##### after(output)
+##### after
 type: `function`
 
 function to call after each test. good for cleanup.
@@ -86,7 +86,8 @@ the test title.
 #### input
 type: `any`
 
-the input to test with.
+the input to test with.\
+[`tentamen.input`](#tentameninput) will be equal to this value.
 
 #### expected
 type: `any`
@@ -95,6 +96,9 @@ the expected output of the test.
 
 ### tentamen.done()
 finish testing, and output the number of passing tests.
+
+### tentamen.input
+the input to the test currently being run.
 
 ## more information
 
